@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
+import os
 
 app = FastAPI()
 
@@ -62,4 +63,5 @@ async def objectives(obj: Objectives):
 
 
 if __name__ == '__main__':
-    uvicorn.run('server:app', host='localhost', port=8081, reload=False)
+    uvicorn.run("server:app", host="0.0.0.0", port=int(os.environ.get("PORT", 8081)), reload=False)
+
