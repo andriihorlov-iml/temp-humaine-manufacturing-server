@@ -50,7 +50,7 @@ class Objectives(BaseModel):
 async def bids(bid: Bid):
     random_bid = Bid(
         task=random.uniform(0.0, BidMaxTask),
-        machine=random.randint(1, 10),
+        machine=bid.machine,
         bid=random.uniform(0.0, BidMax)
     )
     print("Random Bid:", random_bid)
@@ -60,7 +60,7 @@ async def bids(bid: Bid):
 @app.post("/machine_metrics")
 async def machine_metrics(metrics: MachineMetrics):
     random_metrics = MachineMetrics(
-        machine_id=random.randint(1, 10),
+        machine_id=metrics.machine_id,
         down_time=random.uniform(0.0, MachineMetricsMaxDownTime),
         setup_time=random.uniform(0.0, MachineMetricsMaxSetupTime),
         idle_time=random.uniform(0.0, MachineMetricsMaxIdleTime),
