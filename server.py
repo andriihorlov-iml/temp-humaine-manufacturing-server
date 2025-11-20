@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi import Request
 import uvicorn
 import os
 
@@ -41,6 +42,9 @@ async def bids(bid: Bid):
 @app.post("/machine_metrics")
 async def machine_metrics(metrics: MachineMetrics):
     print("Machine metrics:", metrics)
+    raw = await request.body()
+    print("RAW BODY:", raw)   
+    print("HEADERS:", metrics.headers)   
     return metrics
 
 
