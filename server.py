@@ -40,13 +40,11 @@ async def bids(bid: Bid):
 
 
 @app.post("/machine_metrics")
-async def machine_metrics(metrics: MachineMetrics):
-    print("Machine metrics:", metrics)
+async def machine_metrics(metrics: MachineMetrics, request: Request):
     raw = await request.body()
-    print("RAW BODY:", raw)   
-    print("HEADERS:", metrics.headers)   
+    print("RAW BODY:", raw)
+    print("Machine metrics:", metrics)
     return metrics
-
 
 @app.post("/metrics")
 async def metrics(metrics: Metrics):
