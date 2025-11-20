@@ -18,6 +18,7 @@ PerformanceMetricsMaxThroughput = 99.0
 PerformanceMetricsMaxEnergy = 2000
 PerformanceMetricsMaxLateness = 10.0
 
+ObjectivesInitMax = 0.3
 
 # === MODELS ===
 class Bid(BaseModel):
@@ -83,9 +84,9 @@ async def metrics(metrics: Metrics):
 @app.post("/objectives_init")
 async def objectives_init(obj: Objectives):
     random_obj = Objectives(
-        throughput=random.uniform(0.0, PerformanceMetricsMaxThroughput),
-        energy=random.uniform(0.0, PerformanceMetricsMaxEnergy),
-        lateness=random.uniform(0.0, PerformanceMetricsMaxLateness)
+        throughput=random.uniform(0.0, ObjectivesInitMax),
+        energy=random.uniform(0.0, ObjectivesInitMax),
+        lateness=random.uniform(0.0, ObjectivesInitMax)
     )
     print("Random Objectives Init:", random_obj)
     return random_obj
@@ -93,13 +94,8 @@ async def objectives_init(obj: Objectives):
 
 @app.post("/objectives")
 async def objectives(obj: Objectives):
-    random_obj = Objectives(
-        throughput=random.uniform(0.0, PerformanceMetricsMaxThroughput),
-        energy=random.uniform(0.0, PerformanceMetricsMaxEnergy),
-        lateness=random.uniform(0.0, PerformanceMetricsMaxLateness)
-    )
-    print("Random Objectives:", random_obj)
-    return random_obj
+        print("Set Objectives:", obj)
+    return obj
 
 
 if __name__ == '__main__':
