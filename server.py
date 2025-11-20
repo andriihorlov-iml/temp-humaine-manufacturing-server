@@ -94,7 +94,7 @@ async def objectives_init(obj: Objectives):
 
 @app.post("/objectives")
 async def objectives(obj: Objectives):
-        print("Set Objectives:", obj)
+    print("Set Objectives:", obj)
     return obj
 
 
