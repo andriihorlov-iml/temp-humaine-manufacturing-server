@@ -63,6 +63,18 @@ async def objectives(obj: Objectives):
     print("Objectives:", obj)
     return obj
 
+@app.middleware("http")
+async def log_raw_request(request: Request, call_next):
+    body = await request.body()
+    print("=== RAW REQUEST ===")
+    print("PATH:", request.url.path)
+    print("METHOD:", request.method)
+    print("HEADERS:", dict(request.headers))
+    print("BODY RAW:", body)
+    print("===================")
+    response = await call_next(request)
+    return response
+
 
 if __name__ == '__main__':
     uvicorn.run("server:app", host="0.0.0.0", port=int(os.environ.get("PORT", 8081)), reload=False)
