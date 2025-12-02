@@ -2,10 +2,12 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
 import random
+import json
+from typing import Dict, Any
 
 app = FastAPI()
 
-# === YOUR CONSTANTS ===
+# ===  CONSTANTS ===
 MachineMetricsMaxDownTime = 1.0
 MachineMetricsMaxIdleTime = 1.0
 MachineMetricsMaxProductionTime = 1.0
@@ -19,6 +21,22 @@ PerformanceMetricsMaxEnergy = 2000
 PerformanceMetricsMaxLateness = 10.0
 
 ObjectivesInitMax = 0.3
+
+CONFIG_DATA = {
+    "stayDuration": 15,
+    "EnergyBoundaries": {
+        "Min": 1,
+        "Max": 10
+    },
+    "ThroughputBoundaries": {
+        "Min": 1,
+        "Max": 100
+    },
+    "LatenessBoundaries": {
+        "Min": 1,
+        "Max": 10
+    }
+}
 
 # === MODELS ===
 class Bid(BaseModel):
@@ -43,6 +61,10 @@ class Objectives(BaseModel):
     energy: float
     lateness: float
 
+@app.get("/config")
+async def get_config() -> Dict[str, Any]:
+    print("Serving Config:", CONFIG_DATA)
+    return CONFIG_DATA
 
 # === RANDOM RESPONSES ===
 
