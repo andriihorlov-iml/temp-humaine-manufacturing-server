@@ -78,6 +78,9 @@ async def bids(bid: Bid):
     print("Random Bid:", random_bid)
     return random_bid
 
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
 
 @app.post("/machine_metrics")
 async def machine_metrics(metrics: MachineMetrics):
@@ -118,7 +121,3 @@ async def objectives_init(obj: Objectives):
 async def objectives(obj: Objectives):
     print("Set Objectives:", obj)
     return obj
-
-
-if __name__ == '__main__':
-    uvicorn.run('server:app', host='0.0.0.0', port=8081)
