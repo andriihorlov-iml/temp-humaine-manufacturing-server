@@ -23,7 +23,7 @@ PerformanceMetricsMaxLateness = 10.0
 ObjectivesInitMax = 0.3
 
 CONFIG_DATA = {
-    "stayDuration": 15,
+    "stayDuration": 60,
     "EnergyBoundaries": {
         "Min": 1,
         "Max": 10
