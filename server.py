@@ -54,7 +54,7 @@ class MachineMetrics(BaseModel):
 class Metrics(BaseModel):
     throughput: float
     energy: float
-    lateness: float
+    tardiness: float
 
 class Objectives(BaseModel):
     throughput_weight: float
@@ -100,7 +100,7 @@ async def metrics(metrics: Metrics):
     random_metrics = Metrics(
         throughput=random.uniform(0.0, PerformanceMetricsMaxThroughput),
         energy=random.uniform(0.0, PerformanceMetricsMaxEnergy),
-        lateness=random.uniform(0.0, PerformanceMetricsMaxLateness)
+        tardiness=random.uniform(0.0, PerformanceMetricsMaxLateness)
     )
     print("Random Metrics:", random_metrics)
     return random_metrics
@@ -109,9 +109,9 @@ async def metrics(metrics: Metrics):
 @app.post("/objectives_init")
 async def objectives_init(obj: Objectives):
     random_obj = Objectives(
-        throughput=random.uniform(0.0, ObjectivesInitMax),
-        energy=random.uniform(0.0, ObjectivesInitMax),
-        lateness=random.uniform(0.0, ObjectivesInitMax)
+        throughput_weight=random.uniform(0.0, ObjectivesInitMax),
+        energy_weight=random.uniform(0.0, ObjectivesInitMax),
+        tardiness_weight=random.uniform(0.0, ObjectivesInitMax)
     )
     print("Random Objectives Init:", random_obj)
     return random_obj
