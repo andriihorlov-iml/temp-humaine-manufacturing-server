@@ -23,7 +23,7 @@ PerformanceMetricsMaxLateness = 10.0
 ObjectivesInitMax = 0.3
 
 CONFIG_DATA = {
-    "stayDuration": 60,
+    "stayDuration": 20,
     "EnergyBoundaries": {
         "Min": 1,
         "Max": 10
@@ -57,9 +57,9 @@ class Metrics(BaseModel):
     lateness: float
 
 class Objectives(BaseModel):
-    throughput: float
-    energy: float
-    lateness: float
+    throughput_weight: float
+    energy_weight: float
+    tardiness_weight: float
 
 @app.get("/config")
 async def get_config() -> Dict[str, Any]:
